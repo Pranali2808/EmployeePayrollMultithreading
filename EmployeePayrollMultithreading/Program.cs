@@ -25,6 +25,15 @@ namespace EmployeePayrollMultithreading
             stopWatch1.Stop();
             Console.WriteLine("Duration without multi thread: " + stopWatch1.ElapsedMilliseconds + " ms");
 
+            EmployeePayrollOperation repo1 = new EmployeePayrollOperation();
+            Stopwatch stopWatch2 = new Stopwatch();
+            stopWatch2.Start();
+            repo1.AddEmployeeToPayroll(employeeDetails);
+            stopWatch2.Stop();
+            Console.WriteLine("Duration with multi thread: " + stopWatch2.ElapsedMilliseconds + " ms");
+
+            Console.ReadLine();
+
             Console.ReadLine();
         }
     }

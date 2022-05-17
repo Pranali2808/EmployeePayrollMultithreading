@@ -11,7 +11,6 @@ namespace EmployeePayrollMultithreading
 {
     public class EmployeePayrollOperation
     {
-
         public List<EmployeeDetails> list = new List<EmployeeDetails>();
         public void AddEmployeeToPayroll(List<EmployeeDetails> list)
         {
@@ -34,6 +33,20 @@ namespace EmployeePayrollMultithreading
         {
             return this.list.Count;
         }
+        public void AddEmployeeToPayrollWithThread(List<EmployeeDetails> list)
+        {
+            list.ForEach(employeeData =>
+            {
+                Task thread = new Task(() =>
+                {
+                    Console.WriteLine("Employee being added: " + employeeData.EmployeeName);
+                    AddEmployeePayroll(employeeData);
+                    Console.WriteLine("Employee added: " + employeeData.EmployeeName);
+                });
+                thread.Start();
+            });
+        }
     }
 }
 
+       
